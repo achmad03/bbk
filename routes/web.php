@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/about', function () {
+    return view('aboutus');
+});
+
+Route::get('/masuk', function () {
+    return view('masuk');
+});
+
+Route::get('/daftar', function () {
+    return view('daftar');
+});
