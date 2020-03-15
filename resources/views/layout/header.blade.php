@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
-  <link href="/avilon/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/avilon/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
   <link href="/avilon/lib/animate/animate.min.css" rel="stylesheet">
@@ -25,6 +25,10 @@
 
   <!-- Main Stylesheet File -->
   <link href="/avilon/css/style.css" rel="stylesheet">
+  
+  <!-- Form Validator -->
+  <script src="/gen_validatorv4.js" type="text/javascript"></script>
+
 
   <!-- =======================================================
     Theme Name: Avilon
@@ -51,12 +55,47 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="/home" class="menu">Beranda</a></li>
+          <li class="menu-active"><a href="/" class="menu">Beranda</a></li>
           <li><a href="/about" class="menu">Tentang Kami</a></li>
-          <li><a href="#features" class="menu">Peternak</a></li>
-          <li><a href="#pricing" class="menu">Konsumen</a></li>
-          <li><a href="#team" class="menu">Transaksi</a></li>
-          <li><a href="#gallery" class="menu">Profil</a></li>
+          <li class="menu-has-children"><a href="">Supplier</a>
+            <ul style="background-color:#1dc8cd;">
+              <li>
+                <a style="color:#fff;" class="menu" href="/produk/edit">Daftar Kebutuhan Ternak</a>
+              </li>
+              <li>
+                <a style="color:#fff;" class="menu" href="#">#Penjualan Kebutuhan Ternak</a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-has-children"><a href="">Peternak</a>
+            <ul style="background-color:#1dc8cd;">
+              <li>
+                <a style="color:#fff;" class="menu" href="/hasil">Daftar Hasil Ternak</a>
+              </li>
+              <li>
+                <a style="color:#fff;" class="menu" href="#">#Penjualan Hasil Ternak</a>
+              </li>
+              <li>
+                <a style="color:#fff;" class="menu" href="/produk">Daftar Keperluan Ternak</a>
+              </li>
+              <li>
+                <a style="color:#fff;" class="menu" href="/produk/keranjang/daftar">Keranjang Keperluan Ternak</a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-has-children"><a href="">Konsumen</a>
+            <ul style="background-color:#1dc8cd">
+              <li>
+                <a style="color:#fff;" class="menu" href="/hasil">Daftar Hasil Ternak</a>
+              </li>
+              <li>
+                <a style="color:#fff;" class="menu" href="/hasil/keranjang/daftar">Keranjang Hasil Ternak</a>
+              </li>
+              <li>
+                <a style="color:#fff;" class="menu" href="#">#Musim Telur</a>
+              </li>
+            </ul>
+          </li>
           <!--<li class="menu-has-children"><a href="">Drop Down</a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -73,10 +112,31 @@
               <li><a href="#">Drop Down 4</a></li>
               <li><a href="#">Drop Down 5</a></li>
             </ul>
-          </li>-->
-          <li><a href="/daftar" class="menu">Daftar</a></li>
-          <li><a href="/masuk" class="menu">Masuk</a></li>
-        </ul>
+          </li>-->   
+          @if (Route::has('login'))
+                    @auth
+                    <li class="menu-has-children"><a href="">{{Auth::user()->name}}</a>
+                      <ul style="background-color:#fff;opacity:0.5;">
+                        <li>
+                          <a style="color:#000;" class="menu" href="/profile/0">Profil
+                            @if(Auth::user()->role=="")
+                                <b style="background-color:red;padding:2px 2px;margin-top:10px;font-size:10px;" class="icons">!</b>
+                            @endif
+                          </a>
+                        </li>
+                        <li><a style="color:#000;" class="menu" href="/logout">Keluar</a></li>
+                      </ul>
+                    </li>
+                      
+                      
+                    @else
+                      <li><a class="menu" href="/masuk">Masuk</a></li>
+                      <li><a class="menu" href="/daftar">Daftar</a></li>
+                    @endauth
+            @endif
+          </ul> 
+          
+        
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
