@@ -43,7 +43,7 @@ class HasilTernakController extends Controller
 
 
         $foto=$request->file('foto');
-        $fotos="/hasil/".$request->idhasil.".".$foto->getClientOriginalExtension();
+        $fotos="/hasil1/".$request->idhasil.".".$foto->getClientOriginalExtension();
         HasilTernak::where('id_hasil_ternak', $request->idhasil)
         ->update([
             'nama_hasil' => $request->nama,
@@ -53,7 +53,7 @@ class HasilTernakController extends Controller
             'harga_jual' => $request->hargajual,
             'updated_at' => now()
           ]);
-          $foto->move('/hasil',$request->idhasil.".".$foto->getClientOriginalExtension());
+          $foto->move('hasil1',$request->idhasil.".".$foto->getClientOriginalExtension());
 
           
         $produk_supplier = HasilTernak::paginate(12);
