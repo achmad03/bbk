@@ -45,7 +45,7 @@ Route::get('/buat', 'HasilTernakController@buatSession');
 Route::get('/tambah', 'HasilTernakController@tambahSession');
 Route::get('/hapus', 'HasilTernakController@hapusSession');
 
-Route::get('/hasil', 'HasilTernakController@index');
+Route::get('/hasil/daftar', 'HasilTernakController@index');
 Route::get('/hasil/rincian/{id}', 'HasilTernakController@show');
 Route::get('/hasil/keranjang/daftar', 'HasilTernakController@daftar');
 Route::get('/hasil/keranjang', 'HasilTernakController@keranjang');

@@ -93,7 +93,7 @@
               <li class="menu-has-children"><a href="">Konsumen</a>
                 <ul style="background-color:#1dc8cd">
                   <li>
-                    <a style="color:#fff;" class="menu" href="/hasil">Daftar Hasil Ternak</a>
+                    <a style="color:#fff;" class="menu" href="/hasil/daftar">Daftar Hasil Ternak</a>
                   </li>
                   <li>
                     <a style="color:#fff;" class="menu" href="/hasil/keranjang/daftar">Keranjang Hasil Ternak</a>
