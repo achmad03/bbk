@@ -71,7 +71,7 @@ class ProdukController extends Controller
 
 
         $foto=$request->file('foto');
-        $fotos="/produk1/".$request->idproduk."-.".$foto->getClientOriginalExtension();
+        $fotos="/produk/".$request->idproduk."-.".$foto->getClientOriginalExtension();
         Produk::where('id_produk', $request->idproduk)
         ->update([
             'nama_produk' => $request->nama,
@@ -81,7 +81,7 @@ class ProdukController extends Controller
             'harga_jual' => $request->hargajual,
             'updated_at' => now()
           ]);
-          $foto->move('produk1',$request->idproduk."-.".$foto->getClientOriginalExtension());
+          $foto->move('produk',$request->idproduk."-.".$foto->getClientOriginalExtension());
 
           
         $produk_supplier = Produk::paginate(12);
