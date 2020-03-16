@@ -39,7 +39,6 @@ Route::get('/table', function () {
 
 Route::get('/profile/{id}', 'ProfileController@tampil');
 Route::post('/profil/edit', 'ProfileController@edit');
-Route::post('/produk/edit/simpan', 'ProdukController@editsimpan');
 
 Route::get('/tampil', 'HasilTernakController@tampilkanSession');
 Route::get('/buat', 'HasilTernakController@buatSession');
@@ -54,6 +53,11 @@ Route::get('/hasil/keranjang/simpan', 'HasilTernakController@simpan_keranjang');
 Route::get('/hasil/keranjang/pembayaran', 'HasilTernakController@simpan_penjualan');
 Route::get('/hasil/keranjang/pembayaran/simpan', 'HasilTernakController@simpan_transaksi');
 
+Route::get('/hasil/edit', 'HasilTernakController@editdaftar');
+Route::get('/hasil/edit/rincian/{id}', 'HasilTernakController@editrincian');
+Route::post('/hasil/edit/simpan', 'HasilTernakController@editsimpan');
+
+
 Route::get('/konsumen', 'KonsumenController@index');
 Auth::routes();
 
@@ -62,6 +66,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/produk', 'ProdukController@index');
 Route::get('/produk/edit', 'ProdukController@editdaftar');
 Route::get('/produk/edit/rincian/{id}', 'ProdukController@editrincian');
+Route::post('/produk/edit/simpan', 'ProdukController@editsimpan');
 Route::get('/produk/rincian/{id}', 'ProdukController@show');
 Route::get('/produk/keranjang', 'ProdukController@keranjang');
 Route::get('/produk/keranjang/simpan', 'ProdukController@simpan_keranjang');

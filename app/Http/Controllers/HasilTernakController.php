@@ -18,6 +18,48 @@ class HasilTernakController extends Controller
     	return view('hasil', ['hasil_ternak' => $hasil_ternak]);
     }
 
+    public function editrincian($id){
+        $hasil_ternak = HasilTernak::join('peternak', 'peternak.id_peternak', '=', 'hasil_ternak.id_peternak')
+        ->join('users', 'users.id', '=', 'peternak.id')
+        ->where('id_hasil_ternak', $id)->get();
+            return view('editrincianhasil', ['hasil_ternak' => $hasil_ternak]);
+    }
+
+    public function editdaftar()
+    {
+        $hasil_ternak = HasilTernak::paginate(12);
+    	return view('hasiledit', ['hasil_ternak' => $hasil_ternak]);
+    }
+
+    public function editsimpan(Request $request){
+        $this->validate($request,[
+    		'idhasil' => 'required',
+    		'nama' => 'required',
+    		'foto' => 'required',
+    		'deskripsi' => 'required',
+    		'rbjenis' => 'required',
+    		'hargajual' => 'required',
+        ]);
+
+
+        $foto=$request->file('foto');
+        $fotos="/hasil/".$request->idhasil."-.".$foto->getClientOriginalExtension();
+        HasilTernak::where('id_hasil_ternak', $request->idhasil)
+        ->update([
+            'nama_hasil' => $request->nama,
+            'foto_produk' => $fotos,
+            'deskripsi' => $request->deskripsi,
+            'jenis_hasil' => $request->rbjenis,
+            'harga_jual' => $request->hargajual,
+            'updated_at' => now()
+          ]);
+          $foto->move('hasil',$request->idhasil."-.".$foto->getClientOriginalExtension());
+
+          
+        $produk_supplier = HasilTernak::paginate(12);
+        return redirect('/hasil/edit');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

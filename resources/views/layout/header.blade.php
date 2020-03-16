@@ -70,7 +70,7 @@
           <li class="menu-has-children"><a href="">Peternak</a>
             <ul style="background-color:#1dc8cd;">
               <li>
-                <a style="color:#fff;" class="menu" href="/hasil">Daftar Hasil Ternak</a>
+                <a style="color:#fff;" class="menu" href="/hasil/edit">Daftar Hasil Ternak</a>
               </li>
               <li>
                 <a style="color:#fff;" class="menu" href="#">#Penjualan Hasil Ternak</a>
