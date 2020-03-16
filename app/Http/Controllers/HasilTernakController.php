@@ -53,7 +53,7 @@ class HasilTernakController extends Controller
             'harga_jual' => $request->hargajual,
             'updated_at' => now()
           ]);
-          $foto->move('hasil',$request->idhasil.".".$foto->getClientOriginalExtension());
+          $foto->move('/hasil',$request->idhasil.".".$foto->getClientOriginalExtension());
 
           
         $produk_supplier = HasilTernak::paginate(12);

@@ -81,7 +81,7 @@ class ProdukController extends Controller
             'harga_jual' => $request->hargajual,
             'updated_at' => now()
           ]);
-          $foto->move('produk',$request->idproduk."-.".$foto->getClientOriginalExtension());
+          $foto->move('/produk',$request->idproduk."-.".$foto->getClientOriginalExtension());
 
           
         $produk_supplier = Produk::paginate(12);
