@@ -12,14 +12,97 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $produk_supplier = Produk::paginate(12);
-    	return view('produk', ['produk_supplier' => $produk_supplier]);
+        if($id!='tambah'){
+            \Cloudinary::config(array( 
+            "cloud_name" => "achsya03", 
+            "api_key" => "358574269653599", 
+            "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+            "secure" => true
+            ));
+            $produk_supplier = Produk::paginate(12);
+            return view('produk', ['id'=>$id,'produk_supplier' => $produk_supplier]);
+        }elseif($id=='tambah'){
+            return view('rincianproduk', ['id1'=>$id]);
+        }
     }
 
-    public function editdaftar()
-    {
+    public function foto(Request $request){
+        $request->session()->put('fotoproduk',$request->foto);
+        $foto=1;
+        return redirect('/produk/tambah',['foto'=>$foto]);
+    }
+
+    public function tambahsimpan(Request $request){
+        $this->validate($request,[
+    		'nama' => 'required',
+    		'foto' => 'required',
+    		'deskripsi' => 'required',
+    		'rbjenis' => 'required',
+    		'hargajual' => 'required',
+    		'cbbayar' => 'required',
+    		'cbantar' => 'required',
+    		'persediaan' => 'required',
+        ]);
+
+        $produk_supplier = Produk::all();
+        $jml=count($produk_supplier);
+        $new_id_product=600000+$jml+1;
+        
+            \Cloudinary::config(array( 
+                "cloud_name" => "achsya03", 
+                "api_key" => "358574269653599", 
+                "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+                "secure" => true
+              ));
+              $slug=$new_id_product;
+    
+              $file=$_FILES['foto']['tmp_name'];
+              $aa=\Cloudinary\Uploader::upload($file,array("folder" => "Produk/", "public_id"=>$slug,"overwrite" => TRUE));  
+    
+              extract($aa);
+
+              $idbayar=0;
+              foreach ($request->cbbayar as $cbsbayar) {
+                if(count($request->cbbayar)==2){
+                    $idbayar=3;
+                    break;
+                }else{
+                    $idbayar=$cbsbayar;
+                }
+              }
+
+              $idantar=0;
+              foreach ($request->cbantar as $cbsantar) {
+                if(count($request->cbantar)==2){
+                    $idantar=3;
+                    break;
+                }else{
+                    $idantar=$cbsantar;
+                }
+              }
+       
+        Produk::insert([
+    		'id_produk' => $new_id_product,
+    		'id_supplier_in' => 30001,
+    		'nama_produk' => $request->nama,
+    		'deskripsi' => $request->deskripsi,
+    		'jenis_produk' => $request->rbjenis,
+    		'metode_bayar' => $idbayar,
+    		'metode_kirim' => $idantar,
+    		'harga_jual' => $request->hargajual,
+    		'persediaan' => $request->persediaan,
+    		'foto_produk' => '/Produk/'.$slug.$version,
+    		'updated_at' => now()
+    	]);
+
+          
+        $produk_supplier = Produk::paginate(12);
+        return redirect('/produk/edit');
+    }
+
+    public function editdaftar(){
         $produk_supplier = Produk::paginate(12);
     	return view('produkedit', ['produk_supplier' => $produk_supplier]);
     }
@@ -29,8 +112,7 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         //
     }
 
@@ -40,8 +122,7 @@ class ProdukController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
@@ -51,37 +132,82 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id1,$id2){
+        \Cloudinary::config(array( 
+            "cloud_name" => "achsya03", 
+            "api_key" => "358574269653599", 
+            "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+            "secure" => true
+          ));
         $produk_supplier = Produk::join('supplier_in', 'supplier_in.id_supplier_in', '=', 'produk.id_supplier_in')
                                     ->join('users', 'users.id', '=', 'supplier_in.id')
-                                    ->where('id_produk', $id)->get();
-    	return view('rincianproduk', ['produk_supplier' => $produk_supplier]);
+                                    ->where('id_produk', $id2)->get();
+    	return view('rincianproduk', ['id1'=>$id1,'id2'=>$id2,'produk_supplier' => $produk_supplier]);
+    }
+
+    public function show1($id1,$id2){
+        \Cloudinary::config(array( 
+            "cloud_name" => "achsya03", 
+            "api_key" => "358574269653599", 
+            "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+            "secure" => true
+          ));
+          $slug=$id2;
+
+          $file=$_FILES['file']['tmp_name'];
+          $aa=\Cloudinary\Uploader::upload($file,array("folder" => "Produk/", "public_id"=>$slug,"overwrite" => TRUE));  
+
+          extract($aa);
+
+        Produk::where('id_produk', $id2)
+        ->update([
+            'foto_produk' => '/Produk/'.$slug.$version,
+            'updated_at' => now()
+          ]);
+        
+            
+        
+    	return redirect('/produk/rincian/'.$id1.'/'.$id2);
     }
 
     public function editsimpan(Request $request){
         $this->validate($request,[
     		'idproduk' => 'required',
     		'nama' => 'required',
-    		'foto' => 'required',
     		'deskripsi' => 'required',
     		'rbpakan' => 'required',
     		'hargajual' => 'required',
         ]);
+        
+        if(isset($request->foto)){
+            \Cloudinary::config(array( 
+                "cloud_name" => "achsya03", 
+                "api_key" => "358574269653599", 
+                "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+                "secure" => true
+              ));
+              $slug=$request->idproduk;
+    
+              $file=$_FILES['file']['tmp_name'];
+              $aa=\Cloudinary\Uploader::upload($file,array("folder" => "Bebek/", "public_id"=>$slug,"overwrite" => TRUE));  
+    
+              extract($aa);
+            Produk::where('id_produk', $request->idproduk)
+            ->update([
+                'foto_produk' => '/Produk/'.$slug.$version,
+                'updated_at' => now()
+            ]);
+        }
 
-
-        $foto=$request->file('foto');
-        $fotos="/produk/".$request->idproduk."-.".$foto->getClientOriginalExtension();
+       
         Produk::where('id_produk', $request->idproduk)
         ->update([
             'nama_produk' => $request->nama,
-            'foto_produk' => $fotos,
             'deskripsi' => $request->deskripsi,
             'jenis_produk' => $request->rbpakan,
             'harga_jual' => $request->hargajual,
             'updated_at' => now()
           ]);
-          $foto->move('produk',$request->idproduk."-.".$foto->getClientOriginalExtension());
 
           
         $produk_supplier = Produk::paginate(12);
@@ -101,8 +227,7 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
@@ -281,8 +406,7 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -292,8 +416,7 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         //
     }
 }

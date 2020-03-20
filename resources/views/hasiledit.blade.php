@@ -25,14 +25,14 @@
 
         @foreach($hasil_ternak as $ht)
           <div class="col-lg-3">
-            <a href="/hasil/edit/rincian/{{ $ht->id_hasil_ternak }}">
-              <div class="box wow fadeInLeft">
+            <a href="/hasil/rincian/{{ $ht->id_hasil_ternak }}">
+              <div class="box wow fadeInLeft" style="width:100%;">
                 <h7 class="title" style="font-weight:700;">
                   {{ $ht->nama_hasil }}
                 </h7><hr/>
                 <div class="icon">
-                  <img style="height:auto;width:100%;margin-left:auto;margin-right:auto;" src="{{ $ht->foto_produk }}">
-                </div>
+                  <?php echo cl_image_tag($ht->foto_produk, array("secure"=>true, "transformation"=>array(array("width"=>640, "height"=>480)))); ?>
+                </div><hr/>
                 <h8 class="title" style="font-weight:500;">
                   Rp.{{ $ht->harga_jual }},
                 </h8>            

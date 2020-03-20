@@ -28,6 +28,7 @@
   
   <!-- Form Validator -->
   <script src="/gen_validatorv4.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
   <!-- =======================================================
@@ -81,7 +82,7 @@
                     <a style="color:#fff;" class="menu" href="#">#Penjualan Hasil Ternak</a>
                   </li>
                   <li>
-                    <a style="color:#fff;" class="menu" href="/produk">Daftar Keperluan Ternak</a>
+                    <a style="color:#fff;" class="menu" href="/produk/daftar">Daftar Keperluan Ternak</a>
                   </li>
                   <li>
                     <a style="color:#fff;" class="menu" href="/produk/keranjang/daftar">Keranjang Keperluan Ternak</a>

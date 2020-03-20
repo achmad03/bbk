@@ -9,6 +9,16 @@
 # General
 --------------------------------------------------------------*/
 
+.icon img{
+  height:auto;
+  width:100%;
+  margin:0;
+}
+
+.icon{
+  width:100%;
+}
+
 .menu:hover{
   background-color: #1c9ba0;
   padding:15px 15px;
@@ -40,7 +50,7 @@
 
 .main-konten{
   width: 100%;
-  height: 200px;
+  height: auto;
 }
 
 .konten{
@@ -90,6 +100,10 @@
 .setnumber{
   height:100%;
   margin-top:5%;
+}
+
+#blah{
+  display: none;
 }
 
 .tblrincian{
@@ -207,6 +221,7 @@
 .float-mod-right{
   float: right;
   width: 100%;
+  height: auto;
 }
 }
 
@@ -1012,7 +1027,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .icon img{
-  margin: 10px;
 }
 
 #more-features .icon i:before {

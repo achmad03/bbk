@@ -20,24 +20,33 @@
           <span class="section-divider"></span>
           <p class="section-description">Keperluan bagi peternak bebek.</p>
         </div>
-
+        <a href="/produk/tambah" style="color:#fff;" class="btn btn-info">Tambah Produk</a>
+        <hr/>
         <div class="row">
 
         @foreach($produk_supplier as $ps)
           <div class="col-lg-3">
-            <a href="/produk/rincian/{{ $ps->id_produk }}">
+            <a href="/produk/rincian/{{$id}}/{{ $ps->id_produk }}">
               <div class="box wow fadeInLeft">
                 <h7 class="title" style="font-weight:700;">
                   {{ $ps->nama_produk }}
                 </h7><hr/>
                 <div class="icon">
-                  <img style="height:auto;width:100%;margin-left:auto;margin-right:auto;" src="{{ $ps->foto_produk }}">
+                <?php 
+                    $dum=$ps->foto_produk;
+                    $cc=str_split($dum,14);
+                    echo cl_image_tag($cc[0], array("version"=>$cc[1])); 
+                    //echo $cc[0]."-".$cc[1];
+                    //foreach($cc as $ab){
+                    //  echo $ab."<br/>";
+                    //}
+                  ?>
                 </div>
                 <h8 class="title" style="font-weight:500;">
                   Rp.{{ $ps->harga_jual }},
                 </h8>            
               </div>
-             </a>
+            </a>
           </div>
         @endforeach
 

@@ -12,10 +12,93 @@ class HasilTernakController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $hasil_ternak = HasilTernak::paginate(12);
-    	return view('hasil', ['hasil_ternak' => $hasil_ternak]);
+
+
+    public function conf(){
+        
+    }
+
+    public function index($id){
+        if($id!='tambah'){
+            \Cloudinary::config(array( 
+                "cloud_name" => "achsya03", 
+                "api_key" => "358574269653599", 
+                "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+                "secure" => true
+            ));
+            $hasil_ternak = HasilTernak::paginate(12);
+            return view('hasil', ['id'=>$id,'hasil_ternak' => $hasil_ternak]);
+        }elseif($id=='tambah'){
+            return view('rincian', ['id1'=>$id]);
+        }
+    }
+
+    public function tambahsimpan(Request $request){
+        $this->validate($request,[
+    		'nama' => 'required',
+    		'foto' => 'required',
+    		'deskripsi' => 'required',
+    		'rbjenis' => 'required',
+    		'hargajual' => 'required',
+    		'cbbayar' => 'required',
+    		'cbantar' => 'required',
+    		'persediaan' => 'required',
+        ]);
+
+        $hasil_ternak = HasilTernak::all();
+        $jml=count($hasil_ternak);
+        $new_id_hasil=30000+$jml+1;
+        
+            \Cloudinary::config(array( 
+                "cloud_name" => "achsya03", 
+                "api_key" => "358574269653599", 
+                "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+                "secure" => true
+              ));
+              $slug=$new_id_hasil;
+    
+              $file=$_FILES['foto']['tmp_name'];
+              $aa=\Cloudinary\Uploader::upload($file,array("folder" => "Bebek/", "public_id"=>$slug,"overwrite" => TRUE));  
+    
+              extract($aa);
+
+              $idbayar=0;
+              foreach ($request->cbbayar as $cbsbayar) {
+                if(count($request->cbbayar)==2){
+                    $idbayar=3;
+                    break;
+                }else{
+                    $idbayar=$cbsbayar;
+                }
+              }
+
+              $idantar=0;
+              foreach ($request->cbantar as $cbsantar) {
+                if(count($request->cbantar)==2){
+                    $idantar=3;
+                    break;
+                }else{
+                    $idantar=$cbsantar;
+                }
+              }
+       
+        HasilTernak::insert([
+    		'id_hasil_ternak' => $new_id_hasil,
+    		'id_peternak' => 10005,
+    		'nama_hasil' => $request->nama,
+    		'deskripsi' => $request->deskripsi,
+    		'jenis_hasil' => $request->rbjenis,
+    		'metode_bayar' => $idbayar,
+    		'metode_kirim' => $idantar,
+    		'harga_jual' => $request->hargajual,
+    		'persediaan' => $request->persediaan,
+    		'foto_produk' => '/Bebek/'.$slug.$version,
+    		'updated_at' => now()
+    	]);
+
+          
+        $produk_supplier = HasilTernak::paginate(12);
+        return redirect('/hasil/edit');
     }
 
     public function editrincian($id){
@@ -25,36 +108,23 @@ class HasilTernakController extends Controller
             return view('editrincianhasil', ['hasil_ternak' => $hasil_ternak]);
     }
 
-    public function editdaftar()
-    {
-        $hasil_ternak = HasilTernak::paginate(12);
-    	return view('hasiledit', ['hasil_ternak' => $hasil_ternak]);
-    }
-
     public function editsimpan(Request $request){
         $this->validate($request,[
     		'idhasil' => 'required',
     		'nama' => 'required',
-    		'foto' => 'required',
     		'deskripsi' => 'required',
     		'rbjenis' => 'required',
     		'hargajual' => 'required',
         ]);
 
-
-        $foto=$request->file('foto');
-        $fotos="/hasil/".$request->idhasil.".".$foto->getClientOriginalExtension();
         HasilTernak::where('id_hasil_ternak', $request->idhasil)
         ->update([
             'nama_hasil' => $request->nama,
-            'foto_produk' => $fotos,
             'deskripsi' => $request->deskripsi,
             'jenis_hasil' => $request->rbjenis,
             'harga_jual' => $request->hargajual,
             'updated_at' => now()
           ]);
-          $foto->move('hasil',$request->idhasil.".".$foto->getClientOriginalExtension());
-
           
         $produk_supplier = HasilTernak::paginate(12);
         return redirect('/hasil/edit');
@@ -79,6 +149,11 @@ class HasilTernakController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function tambah()
+    {
+    	echo "aa";
     }
 
     public function tampilkanSession(Request $request) {
@@ -117,12 +192,44 @@ class HasilTernakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id1,$id2)
     {
+        \Cloudinary::config(array( 
+            "cloud_name" => "achsya03", 
+            "api_key" => "358574269653599", 
+            "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+            "secure" => true
+          ));
         $hasil_ternak = HasilTernak::join('peternak', 'peternak.id_peternak', '=', 'hasil_ternak.id_peternak')
                                     ->join('users', 'users.id', '=', 'peternak.id')
-                                    ->where('id_hasil_ternak', $id)->get();
-    	return view('rincian', ['hasil_ternak' => $hasil_ternak]);
+                                    ->where('id_hasil_ternak', $id2)->get();
+    	return view('rincian', ['id1'=>$id1,'id2'=>$id2,'hasil_ternak' => $hasil_ternak]);
+    }
+
+    public function show1($id1,$id2)
+    {
+        \Cloudinary::config(array( 
+            "cloud_name" => "achsya03", 
+            "api_key" => "358574269653599", 
+            "api_secret" => "S6UngykP9cfd2JKh5u6uUaz1WXg", 
+            "secure" => true
+          ));
+          $slug=$id2;
+
+          $file=$_FILES['file']['tmp_name'];
+          $aa=\Cloudinary\Uploader::upload($file,array("folder" => "Bebek/", "public_id"=>$slug,"overwrite" => TRUE));  
+
+          extract($aa);
+
+        HasilTernak::where('id_hasil_ternak', $id2)
+        ->update([
+            'foto_produk' => '/Bebek/'.$slug.$version,
+            'updated_at' => now()
+          ]);
+        
+            
+        
+    	return redirect('/hasil/rincian/'.$id1.'/'.$id2);
     }
 
     public function keranjang(Request $request){
