@@ -63,11 +63,11 @@
                           <div class="konten-kanan">
                           <ul>
                               <div class="custom-control custom-radio">
-                                  <li><input name="rbjenis" value="0" type="radio" class="custom-control-input" id="rb1" checked >
+                                  <li><input name="rbjenis" value="1" type="radio" class="custom-control-input" id="rb1" checked >
                                     <label class="custom-control-label" for="rb1">Telur Bebek</label></li>
                               </div>
                               <div class="custom-control custom-radio">
-                                  <li><input name="rbjenis" value="1" type="radio"  class="custom-control-input" id="rb2">
+                                  <li><input name="rbjenis" value="2" type="radio"  class="custom-control-input" id="rb2">
                                     <label class="custom-control-label" for="rb2">Bebek Afkir</label></li>
                               </div>
                           </ul>         

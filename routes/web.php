@@ -71,6 +71,7 @@ Route::post('/produk/foto', 'ProdukController@foto');
 Route::post('/produk/tambah/simpan', 'ProdukController@tambahsimpan');
 
 Route::post('/produk/edit/simpan', 'ProdukController@editsimpan');
+
 Route::get('/produk/rincian/{id1}/{id2}', 'ProdukController@show');
 Route::post('/produk/rincian/{id1}/{id2}', 'ProdukController@show1');
 Route::get('/produk/keranjang', 'ProdukController@keranjang');

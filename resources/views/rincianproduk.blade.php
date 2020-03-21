@@ -246,6 +246,7 @@
               @else
                 <div class="row-flex">
                   <form id="frmPesanan" method="POST" action="/produk/edit/simpan" enctype="multipart/form-data">
+                  {{ csrf_field() }}
                     <div class="row-flex2">
                       <div style="height:100%;" class="float-mod-left about-img wow fadeInLeft">
                       <hr/>

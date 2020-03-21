@@ -209,8 +209,6 @@ class ProdukController extends Controller
             'updated_at' => now()
           ]);
 
-          
-        $produk_supplier = Produk::paginate(12);
         return redirect('/produk/edit');
     }
 
