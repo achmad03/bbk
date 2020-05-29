@@ -80,3 +80,38 @@ Route::get('/produk/keranjang/daftar', 'ProdukController@daftar');
 Route::get('/produk/keranjang/pembayaran', 'ProdukController@simpan_penjualan');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+//Daftar Hasil Ternak dan Produk
+Route::get('/daftar/{id1}', 'HasilAndProdukController@daftar');
+
+//Rincian Hasil Ternak dan Produk
+Route::get('/daftar/{id1}/{id2}/{id3}', 'HasilAndProdukController@rincian');
+Route::get('/daftar/{id1}/{id2}', 'HasilAndProdukController@tambah');
+
+//Keranjang Hasil Ternak dan Produk
+Route::post('/keranjang/simpan/{id1}', 'HasilAndProdukController@keranjang');
+Route::get('/keranjang/{id1}', 'HasilAndProdukController@tampilkeranjang');
+Route::post('/keranjang/{id1}/bayar', 'HasilAndProdukController@bayarbelanjaan');
+Route::post('/keranjang/{id1}/konfirmasi', 'HasilAndProdukController@konfirmasibelanjaan');
+Route::post('/keranjang/perlengkapan/simpan', 'HasilAndProdukController@simpanbelanjaanperlengkapan');
+Route::post('/keranjang/produk/simpan', 'HasilAndProdukController@simpanbelanjaanproduk');
+
+//Route::post('/pembelian/{id1}', 'HasilAndProdukController@simpanbelanjaanperlengkapan');
+
+//Admin
+Route::get('/admin/{id1}', 'AdminController@daftar');
+Route::get('/admin/{id1}/konfirmasi/{id2}', 'AdminController@rincian');
+Route::post('/admin/{id1}/simpan', 'AdminController@simpan');
+
+//Tambah
+Route::get('/{id1}/tambah', 'HasilAndProdukController@tambah');
+
+
+Route::get('/api', 'ProdukController@index1');
+Route::get('/api/create', 'ProdukController@tambahsimpan');
+Route::get('/api/show/{nama}', 'ProdukController@show11');
+
+
+Route::get('/test1/{id1}', 'HasilAndProdukController@test11');
+Route::get('/test1/tambah', 'HasilAndProdukController@test12');
+Route::get('/test1/kurang', 'HasilAndProdukController@test13');

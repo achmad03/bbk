@@ -26,7 +26,11 @@
 
         @foreach($produk_supplier as $ps)
           <div class="col-lg-3">
+          @if($id1=='produk')
             <a href="/produk/rincian/{{$id}}/{{ $ps->id_produk }}">
+          @elseif($id1=='perlengkapan')
+            <a href="/produk/rincian/{{$id}}/{{ $ps->id_hasil_ternak }}">
+          @endif
               <div class="box wow fadeInLeft">
                 <h7 class="title" style="font-weight:700;">
                   {{ $ps->nama_produk }}

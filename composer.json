@@ -10,6 +10,7 @@
         "cloudinary/cloudinary_php": "^1.16",
         "fideloper/proxy": "~3.3",
         "fzaninotto/faker": "^1.9",
+        "ixudra/curl": "^6.19",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0"
     },

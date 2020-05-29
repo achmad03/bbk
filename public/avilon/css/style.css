@@ -10,14 +10,41 @@
 --------------------------------------------------------------*/
 
 .icon img{
+  display:block;
   height:auto;
+  max-height:95%;
+  max-width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: auto;
+  margin-bottom: 1%;
+}
+
+#more-features .box:hover{
+  opacity: 0.7;
+  background: #177579;
+}
+
+
+.icon{
   width:100%;
+}
+
+.biaya{
+  text-align:right;
+}
+
+.kolkeranjang3 img{
+  height:70px;
+  width:auto;
   margin:0;
 }
 
 .icon{
   width:100%;
 }
+
+
 
 .menu:hover{
   background-color: #1c9ba0;

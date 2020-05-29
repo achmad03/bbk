@@ -263,7 +263,10 @@
                           <img src='#' id='blah'>
                         <hr/>
                         <!--<a style="color:#fff;" class="btn btn-info" data-toggle="modal" data-target="#myModal2">Ganti Foto</a>-->
-                        <input type='file' name="foto" id="imgInp"/>
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="imgInp" name='foto'>
+                          <label class="custom-file-label" for="foto">Choose file</label>
+                        </div>
                         <hr/>
                             <label class="tebal" style="padding-left:0;">Deskripsi</label>
                         <p style="height:auto;">

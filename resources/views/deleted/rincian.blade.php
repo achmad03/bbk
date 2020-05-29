@@ -234,12 +234,20 @@
                           <hr/>
                             <label class="tebal" style="padding-left:0;">Nama Hasil Ternak</label><br>
                               <input type="text" name="nama" style="width:70%;" value="{{ $ht->nama_hasil }}">  
-                          <hr/>
-                          <?php
-                            $cc=str_split($ht->foto_produk,12);
-                            echo cl_image_tag($cc[0], array("version"=>$cc[1]));
-                          ?>
-                          <hr/><a style="color:#fff;" class="btn btn-info" data-toggle="modal" data-target="#myModal2">Ganti Foto</a>
+                              <hr/>
+                          <div id="imghide">
+                            <?php 
+                              $cc=str_split($ht->foto_produk,12);
+                              echo cl_image_tag($cc[0], array("version"=>$cc[1]));
+                              //echo $cc[0];
+                            ?>
+                          </div>
+                          <img src='#' id='dumfoto'>
+                        <hr/>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="foto" name='foto'>
+                            <label class="custom-file-label" for="foto">Choose file</label>
+                          </div>
                             <hr/>
                             <label class="tebal" style="padding-left:0;">Deskripsi</label>
                             
@@ -296,6 +304,7 @@
                       </div>
                     </form>
                   </div>
+                  @include('helper.foto1')
                   @include('helper.modal2')
               @endif
             @endforeach

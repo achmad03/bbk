@@ -4,9 +4,9 @@
 	var hasil1 = document.getElementById('jmlpesan');
 	var no=1;
 
-	function hanyaAngka(evt, limitNum) {
+	function hanyaAngka(evt) {
 		var charCode = (evt.which) ? evt.which : event.keyCode
-		if ((charCode > 31 && (charCode < 48 || charCode > 57))||(evt.value.length > limitNum))
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
 		{			
 			return false;
 		}else{

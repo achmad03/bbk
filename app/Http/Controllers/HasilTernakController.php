@@ -330,23 +330,23 @@ class HasilTernakController extends Controller
         $nama_hasil=[];
         $hargajual=[];
         $idhasil=[];
-        $methodkirim=$request->get('methodkirim')[0];
-        $methodbayar=$request->get('methodbayar')[0];
+        $methodkirim=$request->get('methodkirim1')[0];
+        $methodbayar=$request->get('methodbayar1')[0];
         $biayaantar=0;
         $total=0;
         $total1=0;
         $biayaakomodasi=5000;
-		$request->session()->forget('jmlpesan');
+		$request->session()->forget('jmlpesan1');
 
         
         foreach($indek as $indeks){
-            $request->session()->push('jmlpesan',$request->get('jmlpesan')[$indeks]);
+            $request->session()->push('jmlpesan1',$request->get('jmlpesan')[$indeks]);
 
             array_push($jmlpesan,$request->get('jmlpesan')[$indeks]);
-            array_push($hargajual,$request->session()->get('harga_jual')[$indeks]);
+            array_push($hargajual,$request->session()->get('harga_jual1')[$indeks]);
             array_push($idhasil,$request->session()->get('idhasil')[$indeks]);
             array_push($nama_hasil,$request->session()->get('nama_hasil')[$indeks]);
-            $total=$total+($request->get('jmlpesan')[$indeks]*$request->session()->get('harga_jual')[$indeks]);
+            $total=$total+($request->get('jmlpesan')[$indeks]*$request->session()->get('harga_jual1')[$indeks]);
         }
         
 

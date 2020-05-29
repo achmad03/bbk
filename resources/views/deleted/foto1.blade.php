@@ -49,6 +49,7 @@ function readURL(input) {
     
     reader.onload = function(e) {
         //alert(e.target.result);
+      document.getElementById("imghide").style.display = "none";
       document.getElementById("dumfoto").style.display = "block";
       $('#dumfoto').attr('src', e.target.result);
     }

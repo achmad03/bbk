@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Avilon Bootstrap Template</title>
+  <title>Beeiiibek Store</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -60,11 +60,11 @@
           <li><a href="/about" class="menu">Tentang Kami</a></li>
           @if (Route::has('login'))
             @auth
-              @if(Auth::user()->role=="1" || Auth::user()->role=="4")
-              <li class="menu-has-children"><a href="">Supplier</a>
+              @if(Auth::user()->role=="1")
+              <li><a href="#" class="menu">Supplier</a>
                 <ul style="background-color:#1dc8cd;">
                   <li>
-                    <a style="color:#fff;" class="menu" href="/produk/edit">Daftar Kebutuhan Ternak</a>
+                    <a style="color:#fff;" class="menu" href="/daftar/perlengkapan">Daftar Kebutuhan Ternak</a>
                   </li>
                   <li>
                     <a style="color:#fff;" class="menu" href="#">#Penjualan Kebutuhan Ternak</a>
@@ -72,35 +72,47 @@
                 </ul>
               </li>
               @endif
-              @if(Auth::user()->role=="2" || Auth::user()->role=="4")
-              <li class="menu-has-children"><a href="">Peternak</a>
+              @if(Auth::user()->role=="2")
+              <li><a href="#" class="menu">Peternak</a>
                 <ul style="background-color:#1dc8cd;">
                   <li>
-                    <a style="color:#fff;" class="menu" href="/hasil/edit">Daftar Hasil Ternak</a>
+                    <a style="color:#fff;" class="menu" href="/daftar/produk">Daftar Hasil Ternak</a>
                   </li>
                   <li>
                     <a style="color:#fff;" class="menu" href="#">#Penjualan Hasil Ternak</a>
                   </li>
                   <li>
-                    <a style="color:#fff;" class="menu" href="/produk/daftar">Daftar Keperluan Ternak</a>
+                    <a style="color:#fff;" class="menu" href="/daftar/perlengkapan">Daftar Keperluan Ternak</a>
                   </li>
                   <li>
-                    <a style="color:#fff;" class="menu" href="/produk/keranjang/daftar">Keranjang Keperluan Ternak</a>
+                    <a style="color:#fff;" class="menu" href="/keranjang/perlengkapan">Keranjang Keperluan Ternak</a>
                   </li>
                 </ul>
               </li>
               @endif
-              @if(Auth::user()->role=="3" || Auth::user()->role=="4")
-              <li class="menu-has-children"><a href="">Konsumen</a>
+              @if(Auth::user()->role=="3")
+              <li><a href="#" class="menu">Konsumen</a>
                 <ul style="background-color:#1dc8cd">
                   <li>
-                    <a style="color:#fff;" class="menu" href="/hasil/daftar">Daftar Hasil Ternak</a>
+                    <a style="color:#fff;" class="menu" href="/daftar/produk">Daftar Hasil Ternak</a>
                   </li>
                   <li>
-                    <a style="color:#fff;" class="menu" href="/hasil/keranjang/daftar">Keranjang Hasil Ternak</a>
+                    <a style="color:#fff;" class="menu" href="/keranjang/produk">Keranjang Hasil Ternak</a>
                   </li>
                   <li>
                     <a style="color:#fff;" class="menu" href="#">#Musim Telur</a>
+                  </li>
+                </ul>
+              </li>
+              @endif
+              @if(Auth::user()->role=="4")
+              <li><a href="#" class="menu">Admin Penjualan</a>
+                <ul style="background-color:#1dc8cd">
+                  <li>
+                    <a style="color:#fff;" class="menu" href="/admin/produk">Penjualan Hasil Ternak</a>
+                  </li>
+                  <li>
+                    <a style="color:#fff;" class="menu" href="/admin/perlengkapan">Penjualan Kebutuhan Ternak</a>
                   </li>
                 </ul>
               </li>
@@ -126,7 +138,7 @@
           </li>-->   
           @if (Route::has('login'))
                     @auth
-                    <li class="menu-has-children"><a href="">{{Auth::user()->name}}</a>
+                    <li><a href="#" class="menu"><img style='width:30px;height:auto;' src="/images/icon.png"></a>
                       <ul style="background-color:#1dc8cd;">
                         <li>
                           <a style="color:#fff;" class="menu" href="/profile/0">Profil

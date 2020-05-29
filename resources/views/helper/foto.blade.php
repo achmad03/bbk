@@ -6,16 +6,21 @@ function readURL(input) {
     reader.onload = function(e) {
         //alert(e.target.result);
       document.getElementById("imghide").style.display = "none";
-      document.getElementById("blah").style.display = "block";
-      $('#blah').attr('src', e.target.result);
+      document.getElementById("dumfoto").style.display = "block";
+      $('#dumfoto').attr('src', e.target.result);
     }
     
     reader.readAsDataURL(input.files[0]);
   }
 }
 
-$("#imgInp").change(function() {
+$("#foto").change(function() {
   readURL(this);
+});
+
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
 </script>

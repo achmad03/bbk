@@ -58,28 +58,28 @@
                             <th>Nama Biaya</th><th>Sub-Total</th>
                         </tr>
                         <tr>
-                            <td>Pembelian Hasil Ternak
+                            <td>Pembelian Yang Dibeli
                                 <ul class="texttabel" style="padding-left:5%;">
                                     @foreach($nama_hasil as $nama)
                                         <li>{{$nama}}</li>
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>Rp.{{number_format($total,2,",",".")}},-
+                            <td class='biaya'>Rp.{{number_format($total,2,",",".")}}
                                 <ul class="texttabel">
                                     <?php 
                                         for($i=0;$i<count($jmlpesan);$i++){
-                                            echo "<li>Rp.".number_format($jmlpesan[$i]*$hargajual[$i],2,",",".")."</li>";
+                                            echo "<li class='biaya'>Rp.".number_format($jmlpesan[$i]*$hargajual[$i],2,",",".")."</li>";
                                         }
                                     ?>
                                 </ul>
                             </td>
                         </tr>
                         <tr>
-                            <td>Pengantaran</td><td>Rp.{{number_format($biayaantar,2,",",".")}},-</td>
+                            <td>Pengantaran</td><td class='biaya'>Rp.{{number_format($biayaantar,2,",",".")}}</td>
                         </tr>
                         <tr>
-                            <td>Administrasi</td><td>Rp.{{number_format($biayaakomodasi,2,",",".")}},-</td>
+                            <td>Administrasi</td><td class='biaya'>Rp.{{number_format($biayaakomodasi,2,",",".")}}</td>
                         </tr>
                             
                     </table>
@@ -92,12 +92,18 @@
                     Atas Nama "Beeiiibek Dev".</div>
                   <hr/>
                   
-                  <form id="frmTransaksi" method="get" action="/hasil/keranjang/pembayaran/simpan">
+                  <form id="frmTransaksi" method="post" action="/keranjang/{{$id1}}/simpan" enctype="multipart/form-data">
+                  {{ csrf_field() }}
                         @foreach($indek as $indeks)
                             <input type="hidden" value="{{$indeks}}" name="indek[]">
-                        @endforeach  
+                        @endforeach 
+                        @foreach($jmlpesan as $jmlpesans)
+                            <input type="hidden" value="{{$jmlpesans}}" name="jmlpesan[]"> 
+                        @endforeach
+                        <input type="hidden" value="{{Auth::user()->id}}" name="id">
                         <input type="hidden" value="{{$methodbayar}}" name="methodbayar">
                         <input type="hidden" value="{{$methodkirim}}" name="methodkirim">
+                        <input type="hidden" value="{{$total1}}" name="total">
                     <a style="color:#fff;" class="btn btn-info" data-toggle="modal" data-target="#myModal2">Pembayaran</a>
                     @include('helper.modals1')
                   </form>
